@@ -1,0 +1,245 @@
+{
+	"info": {
+		"_postman_id": "project-y-api-collection",
+		"name": "Project Y - API Collection",
+		"description": "קולקציית Postman מלאה לבדיקת כל נתבי השרת. כולל הרשמה, התחברות, עדכון, מחיקה וקבלת משתמשים.",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "Server Health",
+			"item": [
+				{
+					"name": "בדיקת תקינות שרת",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{baseUrl}}/",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								""
+							]
+						},
+						"description": "בדיקת תקינות השרת - מחזיר הודעת הצלחה שהשרת פועל"
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Users",
+			"item": [
+				{
+					"name": "הרשמת משתמש",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"name\": \"יוסי כהן\",\n    \"email\": \"yossi@example.com\",\n    \"password\": \"123456\",\n    \"username\": \"yossi_cohen\",\n    \"phone\": \"050-1234567\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{baseUrl}}/api/users/register",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"api",
+								"users",
+								"register"
+							]
+						},
+						"description": "הרשמת משתמש חדש למערכת. שדות חובה: name, email, password, username. שדה אופציונלי: phone."
+					},
+					"response": []
+				},
+				{
+					"name": "התחברות משתמש",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"username\": \"yossi_cohen\",\n    \"password\": \"123456\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{baseUrl}}/api/users/login",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"api",
+								"users",
+								"login"
+							]
+						},
+						"description": "התחברות משתמש קיים למערכת. דורש username וסיסמה."
+					},
+					"response": []
+				},
+				{
+					"name": "קבלת כל המשתמשים",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{baseUrl}}/api/users",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"api",
+								"users"
+							]
+						},
+						"description": "קבלת רשימת כל המשתמשים במערכת."
+					},
+					"response": []
+				},
+				{
+					"name": "עדכון משתמש (PUT)",
+					"request": {
+						"method": "PUT",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"name\": \"יוסי כהן מעודכן\",\n    \"email\": \"yossi.updated@example.com\",\n    \"password\": \"newpassword123\",\n    \"username\": \"yossi_cohen_updated\",\n    \"phone\": \"050-9999999\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{baseUrl}}/api/users/:id",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"api",
+								"users",
+								":id"
+							],
+							"variable": [
+								{
+									"key": "id",
+									"value": "USER_ID_HERE",
+									"description": "מזהה המשתמש לעדכון (החלף ב-ID אמיתי)"
+								}
+							]
+						},
+						"description": "עדכון מלא של משתמש קיים באמצעות PUT. מחליף את כל השדות."
+					},
+					"response": []
+				},
+				{
+					"name": "עדכון משתמש (PATCH)",
+					"request": {
+						"method": "PATCH",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"name\": \"יוסי כהן מעודכן חלקית\",\n    \"phone\": \"050-8888888\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{baseUrl}}/api/users/:id",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"api",
+								"users",
+								":id"
+							],
+							"variable": [
+								{
+									"key": "id",
+									"value": "USER_ID_HERE",
+									"description": "מזהה המשתמש לעדכון (החלף ב-ID אמיתי)"
+								}
+							]
+						},
+						"description": "עדכון חלקי של משתמש קיים באמצעות PATCH. ניתן לעדכן רק שדות ספציפיים."
+					},
+					"response": []
+				},
+				{
+					"name": "מחיקת משתמש",
+					"request": {
+						"method": "DELETE",
+						"header": [],
+						"url": {
+							"raw": "{{baseUrl}}/api/users/:id",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"api",
+								"users",
+								":id"
+							],
+							"variable": [
+								{
+									"key": "id",
+									"value": "USER_ID_HERE",
+									"description": "מזהה המשתמש למחיקה (החלף ב-ID אמיתי)"
+								}
+							]
+						},
+						"description": "מחיקת משתמש מהמערכת לפי מזהה."
+					},
+					"response": []
+				}
+			]
+		}
+	],
+	"variable": [
+		{
+			"key": "baseUrl",
+			"value": "http://localhost:3001",
+			"type": "string"
+		}
+	]
+}
