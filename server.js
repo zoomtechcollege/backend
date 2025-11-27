@@ -17,7 +17,7 @@ app.use("/api/users", userRoutes)
 app.use("/api/products", productRoutes)
 
 app.get('/', (req, res) => {
-    res.json({ message: 'server is running' })
+    res.json({ message: 'Hahaa Someting has changed' })
 })
 
 app.listen(3001, () => {
